@@ -1,5 +1,8 @@
 #include "Matrix.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
 
 Matrix::Matrix(int rws, int cls) : rows(rws), columns(cls), data(rws, std::vector<double>(cls)) {}
 
@@ -78,4 +81,33 @@ void Matrix::print() const {
         }
         std::cout << std::endl;
     }
+}
+
+void Matrix::load(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Cannot open file: " + filename);
+    }
+    
+    data.clear();
+    std::string line;
+    
+    while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::vector<double> row;
+        double value;
+        
+        while (iss >> value) {
+            row.push_back(value);
+        }
+        
+        if (!row.empty()) {
+            data.push_back(row);
+        }
+    }
+    
+    file.close();
+    
+    rows = data.size();
+    columns = data[0].size();
 }
