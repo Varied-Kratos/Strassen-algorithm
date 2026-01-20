@@ -1,4 +1,4 @@
-#include "Matrix.h"
+#include "matrix.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -110,4 +110,20 @@ void Matrix::load(const std::string& filename) {
     
     rows = data.size();
     columns = data[0].size();
+}
+
+void Matrix::save(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Cannot open file: " + filename);
+    }
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            file << data[i][j] << " ";
+        }
+        file << "\n";
+    }
+
+    file.close();
 }
