@@ -3,7 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
-
 Matrix::Matrix(int rws, int cls) : rows(rws), columns(cls), data(rws, std::vector<double>(cls)) {}
 
 Matrix Matrix::operator+(const Matrix& other) const {

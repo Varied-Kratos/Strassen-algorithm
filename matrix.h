@@ -2,7 +2,7 @@
 #define MATRIX_H
 
 #include <vector>
-
+#include <string>
 class Matrix {
 public:
     std::vector<std::vector<double>> data;
@@ -21,8 +21,10 @@ public:
                          const Matrix& a21, const Matrix& a22);
 
     void print() const;
-
+    
     void load(const std::string& filename);
+
+    void save(const std::string& filename) const;
 };
 
 #endif
